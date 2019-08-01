@@ -50,8 +50,14 @@ public class TrackController
     @DeleteMapping("deletetrack")
     public ResponseEntity<?> deleteTrackById(@RequestParam int trackID)
     {
-        Optional deletedTrack = trackService.deleteTrackbyId(trackID);
+        Optional deletedTrack = trackService.deleteTrackById(trackID);
         return new ResponseEntity<>(deletedTrack,HttpStatus.OK);
+    }
+
+    public ResponseEntity<?> updateTrackById(@RequestParam int trackId, @RequestBody Track updateTrack)
+    {
+        Track updatedTrack = trackService.updateTrackById(trackId,updateTrack);
+        return new ResponseEntity<>(updatedTrack,HttpStatus.OK);
     }
 
 

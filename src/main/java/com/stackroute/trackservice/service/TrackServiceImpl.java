@@ -18,38 +18,39 @@ public class TrackServiceImpl implements TrackService
     }
 
     @Override
-    public Track saveTrack(Track track)
+    public Track saveTrack(Track track)             // Save Track
     {
         Track savedTrack = trackRepository.save(track);
         return savedTrack;
     }
 
     @Override
-    public Track getTrackbyId(int TrackId)
+    public Track getTrackbyId(int trackId)          // Get Track by Id
     {
-        Track retrievedTrack = trackRepository.findById(TrackId).get();
+        Track retrievedTrack = trackRepository.findById(trackId).get();
         return retrievedTrack;
 
     }
 
     @Override
-    public List<Track> getAllTracks()
+    public List<Track> getAllTracks()               // Get all Tracks
     {
         return trackRepository.findAll();
     }
 
     @Override
-    public Optional<Track> deleteTrackbyId(int TrackId)
+    public Optional<Track> deleteTrackById(int trackId)         // Delete Track by Id
     {
-         Optional optional= trackRepository.findById(TrackId);
+         Optional optional = trackRepository.findById(trackId);
          if(optional.isPresent())
-             trackRepository.deleteById(TrackId);
+             trackRepository.deleteById(trackId);
          return optional;
     }
-//
-//    @Override
-//    public Track updateTrack(Track track)
-//    {
-//        Track updatedTrack = trackRepository.
-//    }
+
+    @Override
+    public Track updateTrackById(int trackId, Track trackToUpdate)         // Update Track by Id
+    {
+        trackRepository.findById(trackId).get().setTrackName(trackToUpdate.getTrackName());
+        return trackRepository.save(trackRepository.findById(trackId).get());
+    }
 }
