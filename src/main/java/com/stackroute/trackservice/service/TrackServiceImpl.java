@@ -4,6 +4,9 @@ import com.stackroute.trackservice.domain.Track;
 import com.stackroute.trackservice.repository.TrackRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class TrackServiceImpl implements TrackService
 {
@@ -29,17 +32,20 @@ public class TrackServiceImpl implements TrackService
 
     }
 
-//    @Override
-//    public Track getAllTracks(Track track)
-//    {
-//        Track allTrack = trackRepository.findAll();
-//    }
-//
-//    @Override
-//    public Track deleteTrackbyId(int TrackId)
-//    {
-//        Track deletedTrack = trackRepository.delete();
-//    }
+    @Override
+    public List<Track> getAllTracks()
+    {
+        return trackRepository.findAll();
+    }
+
+    @Override
+    public Optional<Track> deleteTrackbyId(int TrackId)
+    {
+         Optional optional= trackRepository.findById(TrackId);
+         if(optional.isPresent())
+             trackRepository.deleteById(TrackId);
+         return optional;
+    }
 //
 //    @Override
 //    public Track updateTrack(Track track)
